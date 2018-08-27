@@ -3,35 +3,29 @@
   <title></title>
 </head>
 <body>
-     
+<script type="text/javascript" src="scripts/vertex.js"></script>
+<script type="text/javascript" src="scripts/color.js"></script>
+<script type="text/javascript" src="scripts/ncube.js"></script>
+
 <script>
-	class Vector {
-		constuctor(points){
-			this.points = points;
-		}
-		
-	}
-		
-	class Block {
-		constuctor(points){
-			
-		}
-		
-	}
-	class Colour {
-		constructor(r, b, g){
-			this.r = r;
-			this.b = b;
-			this.g = g;
-		}
-	}
-	COLOUR_ORANGE = Colour(0,0,0);
-	COLOUR_WHITE = Colour(0,0,0);
-	COLOUR_BLUE = Colour(0,0,0);
-	COLOUR_GREEN = Colour(0,0,0);
-	COLOUR_RED = Colour(0,0,0);
-	COLOUR_YELLOW = Colour(0,0,0);
-	
+
+console.log("hello, world!");
+
+ var PointA = new Vertex([1,2,3]);
+ var PointB = new Vertex([1,2,3]);
+ var PointC = Vertex.add(PointA, PointB);
+
+console.log(PointC.points);
+
+//let Cube3 = new NCube(3);
+//Cube3.test();
+
+//var Cube4 = new NCube(4);
+
+/*
+
+
+
 	class NCube {
 
 		static COLOURS = [
@@ -42,14 +36,12 @@
 			COLOUR_RED,
 			COLOUR_YELLOW
 		]
-		
+
 		constuctor(dimensions, width){
-			
-			
-			
+
 			this.dimensions = dimensions;
 			this.width = width;
-			
+
 			this.dimensions = dimensions
 			this.size = size
 			this.no_vertexes = 2 ** self.dimensions
@@ -72,7 +64,7 @@
 					pos += [n]
 				print("Vertex: " + str(pos))
 				this.vertexes += [Vertex(pos)]
-		
+
         """Edge Construction"""
         for (i = 0; i < this.no_vertexes; i++):
             for(j = 0; j < this.no_vertexes; j++):
@@ -91,9 +83,12 @@
                     if diff_info[0] == 2:
                         self.add_face(self.vertexes[i], self.vertexes[j])
 		}
-		
+
 	}
 	console.log("javascript is working");
+
+*/
+
 </script>
 </body>
 </html>
