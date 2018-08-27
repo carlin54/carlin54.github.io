@@ -1,11 +1,4 @@
-var js = document.createElement("script");
-
-js.type = "text/javascript";
-js.src = "scripts/vertex.js";
-
-document.body.appendChild(js);
-
-class NCube{
+class NCube {
 
   construct_vertices(){
     this.vertices = []
@@ -20,7 +13,6 @@ class NCube{
           n = -1;
         }
         pos.push(n);
-
       }
       console.log("Vertex: " + pos.toString());
       this.vertices.push(new Vertex(pos));
@@ -30,35 +22,48 @@ class NCube{
   add_edge(a, b){
     var to_add = new Edge(a, b);
     for(var i = 0; i < this.edges.length; i++){
-      if(Edge.is_equal(to_add, this.edges[i]){
+      console.log(to_add.a.points)
+      console.log(to_add.b.points)
+      if(Edge.is_equal(to_add, this.edges[i])){
+        console.log("not making edge!")
         return;
       }
     }
+    console.log("adding edge!")
     this.edges.push(to_add);
+    this.num_edges = this.edges.length;
   }
 
   can_make_edge(a, b){
     var diff = 0;
-    for(var i = 0; i < a.length; i++){
+
+    for(var i = 0; i < a.length(); i++){
       if(a.points[i] != b.points[i]){
         diff++;
       }
+
     }
+
     return diff == 1;
   }
 
   construct_edges(){
-    this.edges = []
+    this.edges = new Array()
 
     for (var i = 0; i < this.num_vertices; i++){
       for(var j = 0; j < this.num_vertices; j++){
         if(i != j){
           if(this.can_make_edge(this.vertices[i], this.vertices[j])){
-              this.add_edge(this.vertices[i], this.vertices[j]);
+            console.log("can make edge -> " +
+                        this.vertices[i].points.toString() +
+                        " - " +
+                        this.vertices[j].points.toString())
+              this.add_edge(this.vertices[i], this.vertices[j])
           }
         }
       }
     }
+
     console.log("Number of Edges: " + this.num_edges);
 
   }
@@ -73,13 +78,10 @@ class NCube{
     this.size = 3;
 
     this.construct_vertices();
+    console.log("After: " + this.vertices.length)
     this.construct_edges();
     this.construct_faces();
 
-  }
-
-  test(){
-    console.log("Hello, World!");
   }
 
 };

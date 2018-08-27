@@ -6,6 +6,13 @@ class Vertex {
   length(){
     return this.points.length;
   }
+  sum(){
+    var total = 0
+    for(var i = 0; i < this.length; i++){
+      total += this.points[i];
+    }
+    return total
+  }
 
   static add(a, b){
     console.log("Hello, World!");
@@ -17,9 +24,10 @@ class Vertex {
   }
 
   static is_equal(a, b){
-    for(var i = 0; i < a.length; i++){
-        if(a.points[i] != b.points[i])
+    for(var i = 0; i < a.length(); i++){
+        if(a.points[i] != b.points[i]){
           return false;
+        }
     }
     return true;
   }

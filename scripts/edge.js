@@ -1,13 +1,21 @@
 class Edge {
 
-  constuctor(a, b){
-    for(var i = 0; i < a.points.length; i++){
-      if(a.points[i] > b.points[i]){
-        break;
-      }else if(a.points[i] < b.points[i]){
-        swap = new Array(a.points);
-        a = b;
-        b = new Vertex(swap.points);
+  constructor(a, b){
+    if(a.sum() > b.sum()){
+      this.a = a;
+      this.b = b;
+    }else if(a.sum() < b.sum()){
+      this.a = b;
+      this.b = a;
+    }else{
+      for(var i = 0; i < a.length(); i++){
+        if(a.points[i] > b.points[i]){
+          this.a = a;
+          this.b = b;
+        }else if (a.points[i] < b.points[i]){
+          this.a = b;
+          this.b = a;
+        }
       }
     }
     this.a = a;
