@@ -3,7 +3,7 @@ class NCube {
   construct_vertices(){
     this.vertices = []
     this.num_vertices = 2 ** this.dimensions;
-    console.log("Number of Verticies: " + this.num_vertices);
+    console.log("Number of Vertices: " + this.num_vertices);
     for (var i = 0; i < this.num_vertices; i++){
       var num = i.toString(2).padStart(this.dimensions, "0")
       var pos = []
@@ -36,9 +36,6 @@ class NCube {
   }
 
   add_face(a, b){
-      console.log(a.points)
-      console.log(b.points)
-
       var to_add = new Face(a, b)
       console.log(to_add.vertices[0].points)
       for(var i = 0; i < this.num_faces; i++){

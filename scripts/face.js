@@ -5,24 +5,26 @@ class Face {
     // p2 - [-1, 1]
     // p3 - [-1, 1]
     // p4 - [-1,-1]
+
     console.log("constructor")
     var diff = Vertex.different_indices(a, b)
+    console.log(diff)
 
     this.points = new Array()
 
-    var p1 = a
+    var p1 = copy(a)
     p1.points[diff[0]] = 1
     p1.points[diff[1]] = 1
 
-    var p2 = a
+    var p2 = copy(a)
     p2.points[diff[0]] =-1
     p2.points[diff[1]] = 1
 
-    var p3 = a
+    var p3 = copy(a)
     p3.points[diff[0]] =-1
     p3.points[diff[1]] =-1
 
-    var p4 = a
+    var p4 = copy(a)
     p4.points[diff[0]] = 1
     p4.points[diff[1]] =-1
 
