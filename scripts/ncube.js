@@ -20,7 +20,7 @@ class NCube {
   }
 
   add_edge(a, b){
-    var to_add = new Edge(a, b);
+    var to_add = new Edge(a, b)
     for(var i = 0; i < this.num_edges; i++){
       if(Edge.is_equal(to_add, this.edges[i])){
         console.log("edge already exists");
@@ -32,25 +32,35 @@ class NCube {
   }
 
   can_make_edge(a, b){
-    var diff = 0
+    return Vertex.num_difference(a, b) == 1
+  }
 
-    for(var i = 0; i < a.length(); i++){
-      if(a.points[i] != b.points[i]){
-        diff++
+  add_face(a, b){
+      console.log(a.points)
+      console.log(b.points)
+
+      var to_add = new Face(a, b)
+      console.log(to_add.vertices[0].points)
+      for(var i = 0; i < this.num_faces; i++){
+        if(Face.is_equal(to_add, this.faces[i])){
+          console.log("face already exists")
+          return
+        }
       }
-    }
+      this.faces.push(to_add)
+      this.num_faces = this.faces.length
+  }
 
-    return diff == 1;
+  can_make_face(a, b){
+    return Vertex.num_difference(a, b) == 2
   }
 
   construct_edges(){
     this.edges = new Array()
     for (var i = 0; i < this.num_vertices; i++){
-      for(var j = i; j < this.num_vertices; j++){
-        if(i != j){
-          if(this.can_make_edge(this.vertices[i], this.vertices[j])){
-              this.add_edge(this.vertices[i], this.vertices[j])
-          }
+      for(var j = i+1; j < this.num_vertices; j++){
+        if(this.can_make_edge(this.vertices[i], this.vertices[j])){
+          this.add_edge(this.vertices[i], this.vertices[j])
         }
       }
     }
@@ -58,18 +68,25 @@ class NCube {
   }
 
   construct_faces(){
-
+    this.faces = new Array()
+    for (var i = 0; i < this.num_vertices; i++){
+      for(var j = i+1; j < this.num_vertices; j++){
+        if(this.can_make_face(this.vertices[i], this.vertices[j])){
+          this.add_face(this.vertices[i], this.vertices[j])
+        }
+      }
+    }
+    console.log("Number of Faces: " + this.num_faces)
   }
 
   constructor(dimensions){
-    console.log("creating cube with " + dimensions.toString() + " dimensions...\n");
-    this.dimensions = dimensions;
-    this.size = 3;
+    console.log("creating cube with " + dimensions.toString() + " dimensions...\n")
+    this.dimensions = dimensions
+    this.size = 3
 
-    this.construct_vertices();
-    console.log("After: " + this.vertices.length)
-    this.construct_edges();
-    this.construct_faces();
+    this.construct_vertices()
+    this.construct_edges()
+    this.construct_faces()
 
   }
 
