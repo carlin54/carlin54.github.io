@@ -1,91 +1,27 @@
 <html>
-<head>
-  <title></title>
-</head>
-<body>
 <script type="text/javascript" src="scripts/misc.js"></script>
 <script type="text/javascript" src="scripts/vertex.js"></script>
 <script type="text/javascript" src="scripts/color.js"></script>
 <script type="text/javascript" src="scripts/edge.js"></script>
-
 <script type="text/javascript" src="scripts/face.js"></script>
 <script type="text/javascript" src="scripts/ncube.js"></script>
+<script type="text/javascript" src="scripts/webgl.js"></script>
+
+<head>
+  <title>WebGL</title>
+</head>
+
+<body>
+  <canvas id="glcanvas" width="640" height="480"></canvas>
+</body>
 
 <script>
 
+  let Cube3 = new NCube(3);
+  let Cube4 = new NCube(4);
 
 
-let Cube3 = new NCube(3);
-
-//var Cube4 = new NCube(4);
-
-/*
-
-
-
-	class NCube {
-
-		static COLOURS = [
-			COLOUR_ORANGE,
-			COLOUR_WHITE,
-			COLOUR_BLUE,
-			COLOUR_GREEN,
-			COLOUR_RED,
-			COLOUR_YELLOW
-		]
-
-		constuctor(dimensions, width){
-
-			this.dimensions = dimensions;
-			this.width = width;
-
-			this.dimensions = dimensions
-			this.size = size
-			this.no_vertexes = 2 ** self.dimensions
-			this.vertexes = []
-			this.edges = []
-
-			for(i = 0; in range(0, NCube.COLOURS.length)){
-				""" 2D, 3x3   """
-				""" 3D, 3x3x3 """
-				this.block += Block(this.dimensions-1, this.size);
-			}
-			"""Vertex Construction"""
-			for (i = 0; this.no_vertexes):
-				num = bin(i)[2:].zfill(self.dimensions )
-				pos = []
-				for j in range(0, self.dimensions ):
-					n = int(num[j])
-					if n == 0:
-						n = -1
-					pos += [n]
-				print("Vertex: " + str(pos))
-				this.vertexes += [Vertex(pos)]
-
-        """Edge Construction"""
-        for (i = 0; i < this.no_vertexes; i++):
-            for(j = 0; j < this.no_vertexes; j++):
-                if i != j:
-                    if self.can_make_edge(self.vertexes[i], self.vertexes[j]):
-                        self.add_edge(self.vertexes[i], self.vertexes[j])
-
-        """Vertexes on a Plane"""
-        for i in range(0, self.no_vertexes):
-            """One differs in 2, the other differs in 1"""
-            face_points = []
-
-            for j in range(0, self.no_vertexes):
-                if i != j:
-                    diff_info = self.differing_dimensions(self.vertexes[i], self.vertexes[j], Colour(0, 0, 0))
-                    if diff_info[0] == 2:
-                        self.add_face(self.vertexes[i], self.vertexes[j])
-		}
-
-	}
-	console.log("javascript is working");
-
-*/
-
+  main();
 </script>
-</body>
+
 </html>

@@ -1,8 +1,8 @@
 
 class Face {
 
-  constructor(a, b){
-    var indices = Vertex.diff(a, b)
+  constructor(a, b, color, size){
+    this.indices = Vertex.diff(a, b)
     this.vertices = new Array()
 
     for(var i = 0; i < 4; i++){
@@ -10,17 +10,17 @@ class Face {
       this.vertices.push(copy)
     }
 
-    this.vertices[0].points[indices[0]] =-1
-    this.vertices[0].points[indices[1]] = 1
+    this.vertices[0].points[this.indices[0]] =-1
+    this.vertices[0].points[this.indices[1]] = 1
 
-    this.vertices[1].points[indices[0]] = 1
-    this.vertices[1].points[indices[1]] = 1
+    this.vertices[1].points[this.indices[0]] = 1
+    this.vertices[1].points[this.indices[1]] = 1
 
-    this.vertices[2].points[indices[0]] = 1
-    this.vertices[2].points[indices[1]] =-1
+    this.vertices[2].points[this.indices[0]] = 1
+    this.vertices[2].points[this.indices[1]] =-1
 
-    this.vertices[3].points[indices[0]] =-1
-    this.vertices[3].points[indices[1]] =-1
+    this.vertices[3].points[this.indices[0]] =-1
+    this.vertices[3].points[this.indices[1]] =-1
 
   }
 

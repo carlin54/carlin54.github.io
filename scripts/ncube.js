@@ -1,10 +1,18 @@
 class NCube {
 
+  generate_color(i){
+    return
+      new Color(((((256) / 4 ) * 1) * i) % 256,
+                ((((256) / 4 ) * 2) * i) % 256,
+                ((((256) / 4 ) * 3) * i) % 256)
+  }
+
   construct_vertices(){
-    this.vertices = []
+    /*this.vertices = []
     this.num_vertices = 2 ** this.dimensions;
     for (var i = 0; i < this.num_vertices; i++){
       var num = i.toString(2).padStart(this.dimensions, "0");
+      console.log(num)
       var pos = [];
       for(var j = 0; j < this.dimensions; j++){
         var n = parseInt(num[j]);
@@ -15,7 +23,26 @@ class NCube {
       }
       var to_add = new Vertex(pos)
       this.vertices.push(to_add)
+    }*/
+
+    this.verticies = []
+    this.num_vertices = 2 ** this.dimensions
+    this.num_face_dimesions = this.dimesions - 1
+    this.num_face_vertices = 2 ** this.num_face_dimensions
+    this.num_sides = 2 * this.dimensions
+    for(var i = 0; i < this.num_sides; i++){
+      var ind_pos = Math.floor(i / 2)
+      var ind_val = (i % 2 == 0) ? -1 : 1
+      var color = this.generate_color(i)
+      console.log(ind_pos)
+      console.log(ind_val)
+      for(var j = 0; j < this.num_face_dimesions; j++){
+        var str = j.toString(2).padStart(this.dimesions, "0")
+        str.splice(ind_pos, 1, ind_val.toString())
+        console.log(str)
+      }
     }
+
   }
 
   add_edge(a, b){
@@ -65,7 +92,7 @@ class NCube {
     this.num_faces = this.faces.length
 
     for(var i = 0; i < this.num_vertices; i++){
-      for(var j = 0; j < this.num_vertices; j++){
+      for(var j = i+1; j < this.num_vertices; j++){
         if(this.can_make_face(this.vertices[i], this.vertices[j])){
           this.add_face(this.vertices[i], this.vertices[j])
         }
@@ -75,17 +102,32 @@ class NCube {
 
   constructor(dimensions){
     console.log("Creating cube with " + dimensions.toString() + " dimensions...\n");
-    this.dimensions = dimensions;
-    this.size = 3;
+    this.dimensions = dimensions
+    this.num_sides = this.dimensions * 2
+    this.row_size = 3
 
     this.construct_vertices()
     console.log("Number of Vertices: " + this.num_vertices)
 
-    this.construct_edges()
-    console.log("Number of Edges: " + this.num_edges)
+    //this.construct_edges()
+    //console.log("Number of Edges: " + this.num_edges)
 
-    this.construct_faces()
-    console.log("Number of Faces: " + this.num_faces)
+    //this.construct_colors()
+    //console.log("Number of Side: " + this.num_sides)
+
+    //this.construct_faces()
+    //console.log("Number of Faces: " + this.num_faces)
+
+    for(var i = 0; i < this.num_vertices; i++){
+
+      console.log()
+    }
+
+    for(var i = 0; i < this.vertices; i++){
+      if(this.vertices.points[0] == -1){
+        console.log(this.vertices.points)
+      }
+    }
   }
 
 };
