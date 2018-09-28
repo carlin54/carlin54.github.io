@@ -8,9 +8,25 @@ class Vertex {
       this.points = other.points.slice(0)
       this.dimensions = new Number(this.points.length)
     }
+    refresh_value();
   }
 
+  constructor(value, dimensions){
+    this.dimensions = []
+    for(var i = 0; i < dimensions; i++){
+      this.dimensions.push(value)
+    }
+    refresh_value();
+  }
 
+  refresh_value(){
+    this.value = 0
+    for(var i = 0; i < this.dimensions; i++){
+      if(this.points[i] == 1){
+        this.value += 2 ** i
+      }
+    }
+  }
 
   sum(){
     var total = 0
@@ -20,7 +36,103 @@ class Vertex {
     return total
   }
 
-  static diff(a, b){
+  static generate_points(dimensions, index_masks, values){
+    var vertices = []
+    var gen_dimensions = dimensions - values.length
+    for(var i = 0; i < 2 ** gen_dimensions; i++){
+      var p = i.toString(2).padStart(2,0)
+      for(var j = 0; j < index_masks.length; j++){
+          p = p.splice(index_masks[j], 0, value[j])
+      }
+
+      var point = []
+      for(var j = 0; j < dimensions; j++){
+        if(p[j] == 1){
+          point.push(1)
+        }else{
+          point.push(-1)
+        }
+      }
+      console.log(point)
+      vertices.push(new Vertex(point))
+
+    }
+    return vertices
+  }
+
+  static generate_points(dimensions){
+    var vertices = []
+
+    for(var i = 0; i < 2 ** dimensions; i++){
+      var p = i.toString(2).padStart(dimensions,0)
+      var point = []
+      for(var j = 0; j < dimensions; j++){
+        if(p[j] == '1'){
+          point.push(1)
+        } else {
+          point.push(-1)
+        }
+      }
+      vertices.push(new Vertex(point))
+    }
+    return vertices
+  }
+
+  static int_to_vector(dimensions, position_in_series){
+    var p = position_in_series.toString(2).padStart(dimensions, 0)
+    var point = []
+
+    for(var j = 0; j < dimensions; j++){
+      if(p[j] == '1'){
+        point.push(1)
+      } else {
+        point.push(-1)
+      }
+    }
+
+    return new Vertex(point)
+  }
+
+  static int_to_bit(dimensions, position_in_series, index){
+    var p = position_in_series.toString(2).padStart(dimensions, 0)
+
+    if(p[index] == '1') return 1
+    else                return -1
+
+
+  }
+
+  static same_indices(a, b){
+    var same = new Array()
+    for(var i = 0; i < a.dimensions; i++){
+      if(a.points[i] == b.points[i]){
+        same.push(i)
+      }
+    }
+    return same;
+  }
+
+  static same_values(a, b){
+    var same = new Array()
+    for(var i = 0; i < a.dimensions; i++){
+      if(a.points[i] == b.points[i]){
+        diff.push(a.points[i])
+      }
+    }
+    return same;
+  }
+
+  static same_sum(a, b){
+    var same = new Array()
+    for(var i = 0; i < a.dimensions; i++){
+      if(a.points[i] == b.points[i]){
+        same.push(i)
+      }
+    }
+    return same;
+  }
+
+  static diff_indices(a, b){
     var diff = new Array()
     for(var i = 0; i < a.dimensions; i++){
       if(a.points[i] != b.points[i]){
@@ -30,8 +142,7 @@ class Vertex {
     return diff;
   }
 
-  static sum_diff(a, b){
-
+  static diff_sum(a, b){
     var diff = 0;
     for(var i = 0; i < a.dimensions; i++){
       if(a.points[i] != b.points[i]){
@@ -42,25 +153,13 @@ class Vertex {
   }
 
   static find_a(a, b){
-      for(var i = 0; i < a.dimensions; i++){
-        if(a.points[i] > b.points[i]){
-          return a
-        }else if(a.points[i] < b.points[i]){
-          return b
-        }
-      }
-      return a
+      if(a.value >= b.value) return a
+      else return b
   }
 
   static find_b(a, b){
-    for(var i = 0; i < a.dimensions; i++){
-      if(a.points[i] > b.points[i]){
-        return b
-      }else if(a.points[i] < b.points[i]){
-        return a
-      }
-    }
-    return b
+    if(a.value >= b.value) return b
+    else return a
   }
 
   static add(a, b){
